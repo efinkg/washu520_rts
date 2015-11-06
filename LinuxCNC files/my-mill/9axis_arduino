@@ -55,6 +55,7 @@ c.newpin("axis5-cmd",hal.HAL_FLOAT,hal.HAL_IN)
 c.newpin("axis6-cmd",hal.HAL_FLOAT,hal.HAL_IN)
 c.newpin("axis7-cmd",hal.HAL_FLOAT,hal.HAL_IN)
 c.newpin("axis8-cmd",hal.HAL_FLOAT,hal.HAL_IN)
+'''
 c.newpin("xMinLmt",hal.HAL_BIT,hal.HAL_IN)
 c.newpin("yMinLmt",hal.HAL_BIT,hal.HAL_IN)
 c.newpin("zMinLmt",hal.HAL_BIT,hal.HAL_IN)
@@ -82,6 +83,7 @@ c.newpin("cHome",hal.HAL_BIT,hal.HAL_IN)
 c.newpin("uHome",hal.HAL_BIT,hal.HAL_IN)
 c.newpin("vHome",hal.HAL_BIT,hal.HAL_IN)
 c.newpin("wHome",hal.HAL_BIT,hal.HAL_IN)
+'''
 time.sleep(2)
 c.ready()
 
@@ -255,7 +257,7 @@ try:
       #The Arduino generates two different key events
       #One when the key is pressed down (+S) and another when it is released (-S)
       #In this case we are going to ignore the release
-
+'''
 # Set min limit triggers
       if(key == "x0"):
         c['xMinLmt'] = 1
@@ -324,7 +326,7 @@ try:
         c['vMaxLmt'] = 1
       if(key == "w2"):
         c['wMaxLmt'] = 1
-
+'''
 # set home switches
       if(key == "x4"):
         c['xHome'] = 0

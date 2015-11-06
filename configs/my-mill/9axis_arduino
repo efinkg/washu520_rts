@@ -55,6 +55,7 @@ c.newpin("axis5-cmd",hal.HAL_FLOAT,hal.HAL_IN)
 c.newpin("axis6-cmd",hal.HAL_FLOAT,hal.HAL_IN)
 c.newpin("axis7-cmd",hal.HAL_FLOAT,hal.HAL_IN)
 c.newpin("axis8-cmd",hal.HAL_FLOAT,hal.HAL_IN)
+'''
 c.newpin("xMinLmt",hal.HAL_BIT,hal.HAL_IN)
 c.newpin("yMinLmt",hal.HAL_BIT,hal.HAL_IN)
 c.newpin("zMinLmt",hal.HAL_BIT,hal.HAL_IN)
@@ -82,6 +83,7 @@ c.newpin("cHome",hal.HAL_BIT,hal.HAL_IN)
 c.newpin("uHome",hal.HAL_BIT,hal.HAL_IN)
 c.newpin("vHome",hal.HAL_BIT,hal.HAL_IN)
 c.newpin("wHome",hal.HAL_BIT,hal.HAL_IN)
+'''
 time.sleep(2)
 c.ready()
 
