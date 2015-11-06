@@ -11,6 +11,7 @@
   #define UaxisEnableSwitches false
   #define VaxisEnableSwitches false
   #define WaxisEnableSwitches false
+  #define fail_epsilon 0.1
   
   // 0 + axisEnabled = individually disabled switch.
   #define xMinSwitch 0
@@ -187,6 +188,10 @@
     #if XaxisEnableSwitches
       #if xMinSwitch
         switchState=digitalRead(xMinSwitch);
+        int randomfail = random(0,1);
+        if(randomfail < fail_epsilon){
+          switchState = HIGH;
+        }
         faultId[0][0]=switchState;
         faultCount+=switchState;
       #else
@@ -200,6 +205,10 @@
       #endif
       #if xMaxSwitch
         switchState=digitalRead(xMaxSwitch);
+        int randomfail = random(0,1);
+        if(randomfail < fail_epsilon){
+          switchState = LOW;
+        }
         faultId[0][1]=switchState;
         faultCount+=switchState;
       #else

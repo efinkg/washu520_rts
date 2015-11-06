@@ -55,7 +55,6 @@ void setup()
 
 long checksumOld=0;
 boolean debug=false;
-float reqSpeed;
 
 void processCommand(long command, long dataOne, long dataTwo)
 {
@@ -92,16 +91,13 @@ void processCommand(long command, long dataOne, long dataTwo)
       // This is a command from the "axis" catagory.
       if(command == 224){ // axis.N.joint-pos-cmd
         if(dataOne == 0){
-          //X Axis
           #if stepperX
             targetPos[dataOne]=(dataTwo/10000.0)*stepsPerUnitX;
             if(targetPos[dataOne]!=targetPosOld[dataOne]){
               #if useVectors
                 targetPos[dataOne]=getVector(dataOne, targetPos[dataOne]);
               #endif
-              float timetopos = (targetPosOld[dataOne] - targetPos[dataOne])*(60000/reqSpeed); //(Inches*milisecond/inches)
-              delay(timetopos);
-              //stprX.moveTo(targetPos[dataOne]);
+              stprX.moveTo(targetPos[dataOne]);
               targetPosOld[dataOne]=targetPos[dataOne];
             }
           #endif
@@ -109,31 +105,25 @@ void processCommand(long command, long dataOne, long dataTwo)
           #endif
         }
         if(dataOne == 1){
-          //Y Axis
           #if stepperY
             targetPos[dataOne]=(dataTwo/10000.0)*stepsPerUnitY;
             if(targetPos[dataOne]!=targetPosOld[dataOne]){
               #if useVectors
                 targetPos[dataOne]=getVector(dataOne, targetPos[dataOne]);
               #endif
-              float timetopos = (targetPosOld[dataOne] - targetPos[dataOne])*(60000/reqSpeed); //(Inches*milisecond/inches)
-              delay(timetopos);
-              //stprY.moveTo(targetPos[dataOne]);
+              stprY.moveTo(targetPos[dataOne]);
               targetPosOld[dataOne]=targetPos[dataOne];
             }
           #endif
         }
         if(dataOne == 2){
-          //Z Axis
           #if stepperZ
             targetPos[dataOne]=(dataTwo/10000.0)*stepsPerUnitZ;
             if(targetPos[dataOne]!=targetPosOld[dataOne]){
               #if useVectors
                 targetPos[dataOne]=getVector(dataOne, targetPos[dataOne]);
               #endif
-              float timetopos = (targetPosOld[dataOne] - targetPos[dataOne])*(60000/reqSpeed); //(Inches*milisecond/inches)
-              delay(timetopos);
-              //stprZ.moveTo(targetPos[dataOne]);
+              stprZ.moveTo(targetPos[dataOne]);
               targetPosOld[dataOne]=targetPos[dataOne];
             }
           #endif
@@ -145,9 +135,7 @@ void processCommand(long command, long dataOne, long dataTwo)
               #if useVectors
                 targetPos[dataOne]=getVector(dataOne, targetPos[dataOne]);
               #endif
-              float timetopos = (targetPosOld[dataOne] - targetPos[dataOne])*(60000/reqSpeed); //(Inches*milisecond/inches)
-              delay(timetopos);
-              //stprA.moveTo(targetPos[dataOne]);
+              stprA.moveTo(targetPos[dataOne]);
               targetPosOld[dataOne]=targetPos[dataOne];
             }
           #endif
@@ -159,9 +147,7 @@ void processCommand(long command, long dataOne, long dataTwo)
               #if useVectors
                 targetPos[dataOne]=getVector(dataOne, targetPos[dataOne]);
               #endif
-              float timetopos = (targetPosOld[dataOne] - targetPos[dataOne])*(60000/reqSpeed); //(Inches*milisecond/inches)
-              delay(timetopos);
-              //stprB.moveTo(targetPos[dataOne]);
+              stprB.moveTo(targetPos[dataOne]);
               targetPosOld[dataOne]=targetPos[dataOne];
             }
           #endif
@@ -173,9 +159,7 @@ void processCommand(long command, long dataOne, long dataTwo)
               #if useVectors
                 targetPos[dataOne]=getVector(dataOne, targetPos[dataOne]);
               #endif
-              float timetopos = (targetPosOld[dataOne] - targetPos[dataOne])*(60000/reqSpeed); //(Inches*milisecond/inches)
-              delay(timetopos);
-              //stprC.moveTo(targetPos[dataOne]);
+              stprC.moveTo(targetPos[dataOne]);
               targetPosOld[dataOne]=targetPos[dataOne];
             }
           #endif
@@ -187,9 +171,7 @@ void processCommand(long command, long dataOne, long dataTwo)
               #if useVectors
                 targetPos[dataOne]=getVector(dataOne, targetPos[dataOne]);
               #endif
-              float timetopos = (targetPosOld[dataOne] - targetPos[dataOne])*60000/reqSpeed); //(Inches*milisecond/inches)
-              delay(timetopos);
-              //stprU.moveTo(targetPos[dataOne]);
+              stprU.moveTo(targetPos[dataOne]);
               targetPosOld[dataOne]=targetPos[dataOne];
             }
           #endif
@@ -201,9 +183,7 @@ void processCommand(long command, long dataOne, long dataTwo)
               #if useVectors
                 targetPos[dataOne]=getVector(dataOne, targetPos[dataOne]);
               #endif
-              float timetopos = (targetPosOld[dataOne] - targetPos[dataOne])*60000/reqSpeed); //(Inches*milisecond/inches)
-              delay(timetopos);
-              //stprV.moveTo(targetPos[dataOne]);
+              stprV.moveTo(targetPos[dataOne]);
               targetPosOld[dataOne]=targetPos[dataOne];
             }
           #endif
@@ -215,9 +195,7 @@ void processCommand(long command, long dataOne, long dataTwo)
               #if useVectors
                 targetPos[dataOne]=getVector(dataOne, targetPos[dataOne]);
               #endif
-              float timetopos = (targetPosOld[dataOne] - targetPos[dataOne])*60000/reqSpeed); //(Inches*milisecond/inches)
-              delay(timetopos);
-              //stprW.moveTo(targetPos[dataOne]);
+              stprW.moveTo(targetPos[dataOne]);
               targetPosOld[dataOne]=targetPos[dataOne];
             }
           #endif
@@ -233,7 +211,7 @@ void processCommand(long command, long dataOne, long dataTwo)
       }
       if(command == 226){
         if(dataTwo<0){dataTwo=dataTwo*-1;}
-        reqSpeed=(dataTwo/10000.0)*stepsPerUnit[dataOne];
+        float reqSpeed=(dataTwo/10000.0)*stepsPerUnit[dataOne];
         float delta=getDelta(dataOne,targetPos[dataOne]);
         // ok, LinuxCNC likes to spam these about 0.5 seconds too early. So we delay them,
         // and repeats reset the timer. (Otherwise we'll stall to zero prematurely and jerk back to life later.)
@@ -396,6 +374,7 @@ void doUrgentStuff()
      things that are time sensitive but also don't require
      everything else wait for it to complete.
   */
+  /*
   #if useLimitSwitches
     checkSwitches();
   #endif
@@ -408,6 +387,7 @@ void doUrgentStuff()
   #if useEncoderServo
     moveEncoderServos();
   #endif
+  */
 }
 
 void doIdleStuff()
