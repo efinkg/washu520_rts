@@ -1,4 +1,4 @@
-#define useAccelStepper true
+#define useAccelStepper false
 
 // Requires the AccelStepper Library 1.31 or higher.
 // Available at http://www.open.com.au/mikem/arduino/AccelStepper

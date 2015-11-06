@@ -1981,7 +1981,7 @@ def makePins(codesAccepted, axisesRequested):
 try:
     threadsRun=True
     for i in range(0, maxClients - 1):
-        port = "/dev/ttyS" + str(i)
+        port = "/dev/ttyUSB0"
         start_new_thread(comThread, (port, ) )
         sleep(0.1)
     for i in range(0, maxClients - 1):
