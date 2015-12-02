@@ -1,0 +1,4 @@
+Value,Non_RT_No_Load,Non_RT_No,RT_No_Load,RT_Load
+Less than 1 milisecond,0.002,0.002,58.635,42.77
+Exactly 1 milisecond,0,0,13.068,35.1
+Greater than 1 milisecond,99.998,99.998,28.297,22.13
