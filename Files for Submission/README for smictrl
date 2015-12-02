@@ -1,0 +1,14 @@
+README for smictrl
+smictrl created by Jan Kiszka: git.kiszka.org/?p=smictrl.git
+README written by Jeremy Tang for CSE520S: jntang@wustl.edu
+
+System Management Interrupts are pretty cool in non-real-time systems.
+In real-time systems, SMIs interrupt the CPU for an unacceptably long duration of time, so they should be disabled.
+
+Compile smictrl using the following command:
+
+make
+
+Disable SMI bits using the following command:
+
+sudo ./smictrl -s 0
