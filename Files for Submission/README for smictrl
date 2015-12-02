@@ -4,8 +4,13 @@ README written by Jeremy Tang for CSE520S: jntang@wustl.edu
 
 System Management Interrupts are pretty cool in non-real-time systems.
 In real-time systems, SMIs interrupt the CPU for an unacceptably long duration of time, so they should be disabled.
+Smictrl is a handy utility for controlling (and disabling) SMI.
 
-Compile smictrl using the following command:
+Get smictrl using the following command:
+
+git clone git://git.kiszka.org/smictrl.git
+
+Open the smictrl folder and compile smictrl using the following command:
 
 make
 
