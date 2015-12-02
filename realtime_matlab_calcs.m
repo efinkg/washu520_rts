@@ -102,18 +102,11 @@ rt_2_less = round(rt_2_less / total_count_rt_2 * 100,3);
 rt_2_equal = round(rt_2_equal / total_count_rt_2 * 100,3);
 rt_2_greater = round(rt_2_greater / total_count_rt_2 * 100,3);
 
-table_labels = {'Value','Non RT, No Load','Non RT, Load','RT, No Load','RT, Load'};
-value = {'Less than 1 milisecond';'Exactly 1 milisecond';'Greater than 1 milisecond'};
-non_rt_1= [nrt_1_less;nrt_1_equal;nrt_1_greater];
-non_rt_2 = [nrt_2_less;nrt_2_equal;nrt_2_greater];
-rt_1 = [rt_1_less;rt_1_equal;rt_1_greater];
-rt_2 = [rt_2_less;rt_2_equal;rt_2_greater];
-
 table_compare = table({'Less than 1 milisecond';'Exactly 1 milisecond';'Greater than 1 milisecond'},...
 [nrt_1_less;nrt_1_equal;nrt_1_greater],...
 [nrt_2_less;nrt_2_equal;nrt_2_greater],...
-[rt_1_less;rt_1_equal;rt_1_greater],...
 [rt_2_less;rt_2_equal;rt_2_greater],...
+[rt_1_less;rt_1_equal;rt_1_greater],...
 'VariableNames',{'Value' 'Non_RT_No_Load' 'Non_RT_No' 'RT_No_Load' 'RT_Load'})
 writetable(table_compare,'compare_table_001.csv','Delimiter',',')
 
@@ -146,8 +139,53 @@ rt_1_equal = round(rt_1_equal / total_count_rt_1 * 100,3);
 rt_1_greater = round(rt_1_greater / total_count_rt_1 * 100,3);
 
 rt_2_less = nnz(sorted_realtime_time_diffs_2<0.001005);
-rt_2_equal = nnz(sorted_realtime_time_diffs_2==0.0010050);
+rt_2_equal = nnz(sorted_realtime_time_diffs_2==0.001005);
 rt_2_greater = nnz(sorted_realtime_time_diffs_2>0.001005);
+total_count_rt_2 = rt_2_less + rt_2_equal + rt_2_greater;
+
+rt_2_less = round(rt_2_less / total_count_rt_2 * 100,3);
+rt_2_equal = round(rt_2_equal / total_count_rt_2 * 100,3);
+rt_2_greater = round(rt_2_greater / total_count_rt_2 * 100,3);
+
+table_compare = table({'Less than 1 milisecond 5 nanoseconds';'Exactly 1 milisecond 5 nanoseconds';'Greater than 1 milisecond 5 nanoseconds'},...
+[nrt_1_less;nrt_1_equal;nrt_1_greater],...
+[nrt_2_less;nrt_2_equal;nrt_2_greater],...
+[rt_2_less;rt_2_equal;rt_2_greater],...
+[rt_1_less;rt_1_equal;rt_1_greater],...
+'VariableNames',{'Value' 'Non_RT_No_Load' 'Non_RT_No' 'RT_No_Load' 'RT_Load'})
+writetable(table_compare,'compare_table_001005.csv','Delimiter',',')
+
+%%
+nrt_1_less = nnz(sorted_non_realtime_time_diffs_1<double(0.000101));
+nrt_1_equal = nnz(sorted_non_realtime_time_diffs_1==double(0.000101));
+nrt_1_greater = nnz(sorted_non_realtime_time_diffs_1>double(0.000101));
+total_count_nrt_1 = nrt_1_less + nrt_1_equal + nrt_1_greater;
+
+nrt_1_less = round(nrt_1_less / total_count_nrt_1 * 100,3);
+nrt_1_equal = round(nrt_1_equal / total_count_nrt_1 * 100,3);
+nrt_1_greater = round(nrt_1_greater / total_count_nrt_1 * 100,3);
+
+nrt_2_less = nnz(sorted_non_realtime_time_diffs_2<double(0.000101));
+nrt_2_equal = nnz(sorted_non_realtime_time_diffs_2==double(0.000101));
+nrt_2_greater = nnz(sorted_non_realtime_time_diffs_2>double(0.000101));
+total_count_nrt_2 = nrt_2_less + nrt_2_equal + nrt_2_greater;
+
+nrt_2_less = round(nrt_2_less / total_count_nrt_2 * 100,3);
+nrt_2_equal = round(nrt_2_equal / total_count_nrt_2 * 100,3);
+nrt_2_greater = round(nrt_2_greater / total_count_nrt_2 * 100,3);
+
+rt_1_less = nnz(sorted_realtime_time_diffs_1<double(0.000101));
+rt_1_equal = nnz(sorted_realtime_time_diffs_1==double(0.000101));
+rt_1_greater = nnz(sorted_realtime_time_diffs_1>double(0.000101));
+total_count_rt_1 = rt_1_less + rt_1_equal + rt_1_greater;
+
+rt_1_less = round(rt_1_less / total_count_rt_1 * 100,3);
+rt_1_equal = round(rt_1_equal / total_count_rt_1 * 100,3);
+rt_1_greater = round(rt_1_greater / total_count_rt_1 * 100,3);
+
+rt_2_less = nnz(sorted_realtime_time_diffs_2<0.000101);
+rt_2_equal = nnz(sorted_realtime_time_diffs_2==0.000101);
+rt_2_greater = nnz(sorted_realtime_time_diffs_2>0.000101);
 total_count_rt_2 = rt_2_less + rt_2_equal + rt_2_greater;
 
 rt_2_less = round(rt_2_less / total_count_rt_2 * 100,3);
@@ -161,13 +199,13 @@ non_rt_2 = [nrt_2_less;nrt_2_equal;nrt_2_greater];
 rt_1 = [rt_1_less;rt_1_equal;rt_1_greater];
 rt_2 = [rt_2_less;rt_2_equal;rt_2_greater];
 
-table_compare = table({'Less than 1 milisecond 5 nanoseconds';'Exactly 1 milisecond 5 nanoseconds';'Greater than 1 milisecond 5 nanoseconds'},...
+table_compare = table({'Less than 1 milisecond 10 nanoseconds';'Exactly 1 milisecond 10 nanoseconds';'Greater than 1 milisecond 10 nanoseconds'},...
 [nrt_1_less;nrt_1_equal;nrt_1_greater],...
 [nrt_2_less;nrt_2_equal;nrt_2_greater],...
-[rt_1_less;rt_1_equal;rt_1_greater],...
 [rt_2_less;rt_2_equal;rt_2_greater],...
+[rt_1_less;rt_1_equal;rt_1_greater],...
 'VariableNames',{'Value' 'Non_RT_No_Load' 'Non_RT_No' 'RT_No_Load' 'RT_Load'})
-writetable(table_compare,'compare_table_001005.csv','Delimiter',',')
+writetable(table_compare,'compare_table_000101.csv','Delimiter',',')
 
 %%
 figure(1)
